@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.dto.response;
+package com.josheytee.niheapp.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package com.josheytee.niheapp.controllers;
 
-import com.josheytee.niheapp.dto.response.StoryResponse;
+import com.josheytee.niheapp.response.BaseResponse;
+import com.josheytee.niheapp.response.dto.StoryDTO;
 import com.josheytee.niheapp.services.StoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,13 @@ public class StoriesController {
     }
 
     @PostMapping("/all/{userid}")
-    public ResponseEntity<List<StoryResponse>> all(long userid) {
-        List<StoryResponse> all = storyService.all(userid);
-        return new ResponseEntity<List<StoryResponse>>(all, HttpStatus.CREATED);
+    public ResponseEntity<BaseResponse<List<StoryDTO>>> all(long userid) {
+        List<StoryDTO> userStories = storyService.getUserStories(userid);
+        BaseResponse<List<StoryDTO>> listBaseResponse = new BaseResponse<>();
+        listBaseResponse.setData(userStories);
+        listBaseResponse.setMessage("Successfully Fetched user stories");
+        listBaseResponse.setCode(201);
+        return new ResponseEntity<>(listBaseResponse, HttpStatus.CREATED);
 
     }
 }

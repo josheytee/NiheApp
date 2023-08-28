@@ -1,20 +1,11 @@
 package com.josheytee.niheapp.services;
 
-import com.josheytee.niheapp.dto.response.StoryResponse;
-import com.josheytee.niheapp.dto.requests.StoryRequest;
 import com.josheytee.niheapp.entities.Story;
+import com.josheytee.niheapp.response.dto.StoryDTO;
 
 import java.util.List;
 
-public interface StoryService {
+public interface StoryService extends BaseCRUDService<Story> {
+    public List<StoryDTO> getUserStories(long userid);
 
-    public StoryResponse create(Story story);
-
-    public List<StoryResponse> all(long userid);
-
-    public StoryResponse update(long story_id, StoryRequest storyRequest);
-
-    public StoryResponse get(long story_id);
-
-    public StoryResponse delete(long story_id) throws Exception;
 }
