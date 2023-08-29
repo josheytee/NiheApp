@@ -22,6 +22,6 @@ public class User extends BaseEntity {
     private String address;
 
     //    ArrayList<User> friends;
-//    @OneToMany(mappedBy ="user", cascade =CascadeType.ALL)
+//    @OneToMany(mappedBy ="user", cascade = CascadeType.ALL)
 //    private ArrayList<Comment> comments;
 }

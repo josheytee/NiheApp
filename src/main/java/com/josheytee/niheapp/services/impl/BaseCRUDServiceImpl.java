@@ -40,7 +40,7 @@ public abstract class BaseCRUDServiceImpl<T> implements BaseCRUDService<T> {
 
     @Override
     public T get(long id) {
-        return (T) this.baseRepository.findById(id);
+        return (T) this.baseRepository.findById(id).orElseThrow();
     }
 
     @Override

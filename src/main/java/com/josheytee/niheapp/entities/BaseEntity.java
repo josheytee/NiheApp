@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 public abstract class BaseEntity {
     private Long id;
 
-    public BaseEntity() {
-    }
-
 //    @GeneratedValue(generator = "UUID")
 //    @GenericGenerator(
 //            name = "UUID",

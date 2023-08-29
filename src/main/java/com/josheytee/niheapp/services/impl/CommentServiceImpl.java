@@ -1,17 +1,18 @@
 package com.josheytee.niheapp.services.impl;
 
 import com.josheytee.niheapp.entities.Comment;
-import com.josheytee.niheapp.repositories.BaseRepository;
+import com.josheytee.niheapp.repositories.CommentRepository;
 import com.josheytee.niheapp.services.CommentService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CommentServiceImpl extends BaseCRUDServiceImpl<Comment> implements CommentService {
-    public CommentServiceImpl(BaseRepository<Comment, Long> baseRepository) {
-        super(baseRepository);
+    private final CommentRepository commentRepository;
+    public CommentServiceImpl(CommentRepository commentRepository) {
+        super(commentRepository);
+        this.commentRepository = commentRepository;
     }
 
-//    private final CommentRepository commentRepository;
 
 
 

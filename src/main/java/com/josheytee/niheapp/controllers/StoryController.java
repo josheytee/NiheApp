@@ -22,7 +22,11 @@ public class StoryController {
 
     @PostMapping("/create")
     public ResponseEntity<BaseResponse<Story>> create(@RequestBody StoryRequest storyRequest) {
-        Story story = this.storyService.create(new Story(storyRequest.getTitle(), storyRequest.getContent()));
+        Story storyBuilder = Story.builder()
+                .title(storyRequest.getTitle())
+                .content(storyRequest.getContent())
+                .build();
+        Story story = this.storyService.create(storyBuilder);
         BaseResponse<Story> storyBaseResponse = new BaseResponse<>(201, "Story created Successfully!", story);
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.CREATED);
     }
