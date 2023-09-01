@@ -39,33 +39,12 @@ public class CommentController {
                 .content(commentRequest.getContent())
                 .story(story)
                 .build();
-//        story.setComments(List.of(commentBuilder));
         Comment comment = this.commentService.create(commentBuilder);
         BaseResponse<Comment> commentBaseResponse = new BaseResponse<>(201, "Comment Created Successfully!", comment);
         return new ResponseEntity<>(commentBaseResponse, HttpStatus.CREATED);
     }
 
-//    @PutMapping("/update/{story_id}")
-//    public ResponseEntity<BaseResponse<Story>> updateStory(ModelMapper modelMapper, @PathVariable long story_id,
-//                                                           @RequestBody commentRequest commentRequest) {
-//        Story map = modelMapper.map(commentRequest, Story.class);
-////        map.setId(story_id);
-//        BaseResponse.BaseResponseBuilder<Story> storyBaseResponse = BaseResponse.builder();
-//        try {
-//            Story story = this.commentService.update(story_id, map);
-//
-//            storyBaseResponse.code(200)
-//                    .message("Story created Successfully!")
-//                    .data(story);
-////            return new ResponseEntity<>(storyBaseResponse, HttpStatus.OK);
-//        } catch (Exception exception) {
-//            storyBaseResponse.code(400)
-//                    .message(exception.getMessage())
-//                    .data(null);
-//        }
-//            return new ResponseEntity<>(storyBaseResponse.build(), HttpStatus.OK);
-//
-//    }
+
 //
 //    @GetMapping("/{id}")
 //    public ResponseEntity<BaseResponse<Story>> getStory(@PathVariable("id") long id) {

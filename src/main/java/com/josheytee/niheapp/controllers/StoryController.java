@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/story")
+@RequestMapping("/api/stories")
 public class StoryController {
 
     private final StoryService storyService;
@@ -20,7 +20,7 @@ public class StoryController {
         this.storyService = storyService;
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<BaseResponse<Story>> create(@RequestBody StoryRequest storyRequest) {
         Story storyBuilder = Story.builder()
                 .title(storyRequest.getTitle())
@@ -31,7 +31,7 @@ public class StoryController {
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{story_id}")
+    @PutMapping("/{story_id}")
     public ResponseEntity<BaseResponse<Story>> updateStory(ModelMapper modelMapper, @PathVariable long story_id,
                                                            @RequestBody StoryRequest storyRequest) {
         Story map = modelMapper.map(storyRequest, Story.class);
@@ -63,12 +63,23 @@ public class StoryController {
     }
 
     //
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<BaseResponse<Story>> delete(@PathVariable("id") long id) throws Exception {
         storyService.delete(id);
         BaseResponse<Story> storyBaseResponse = new BaseResponse<>(200, "Story deleted Successfully!", null);
 
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.OK);
     }
+
+    //    @PostMapping("/{userid}")
+//    public ResponseEntity<BaseResponse<List<StoryDTO>>> all(long userid) {
+//        List<StoryDTO> userStories = storyService.getUserStories(userid);
+//        BaseResponse<List<StoryDTO>> listBaseResponse = new BaseResponse<>();
+//        listBaseResponse.setData(userStories);
+//        listBaseResponse.setMessage("Successfully Fetched user stories");
+//        listBaseResponse.setCode(201);
+//        return new ResponseEntity<>(listBaseResponse, HttpStatus.CREATED);
+//
+//    }
 
 }

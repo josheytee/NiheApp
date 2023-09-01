@@ -1,7 +1,15 @@
 package com.josheytee.niheapp.controllers;
 
+import com.josheytee.niheapp.entities.User;
+import com.josheytee.niheapp.requests.UserRequest;
+import com.josheytee.niheapp.response.dto.UserDTO;
 import com.josheytee.niheapp.services.UserService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,13 +22,23 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<UserResponse> create(@RequestBody UserRequest userRequest) {
-//        User user = new User();
-//        BeanUtils.copyProperties(userRequest, user);
-//        UserResponse userResponse = this.userService.create(user);
-//        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.CREATED);
-//    }
+    @PostMapping("/create")
+    public ResponseEntity<UserDTO> create(@RequestBody UserRequest userRequest) {
+        User userBuilder = User.builder()
+                .firstname(userRequest.getFirstname())
+                .lastname(userRequest.getLastname())
+                .username(userRequest.getUsername())
+                .email(userRequest.getEmail())
+                .phone(userRequest.getPhone())
+                .address(userRequest.getAddress())
+                .state(userRequest.getState())
+                .country(userRequest.getCountry())
+                .build();
+        User user = this.userService.create(userBuilder);
+        UserDTO userResponse = new UserDTO();
+        BeanUtils.copyProperties(user, userResponse);
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+    }
 //
 //    @PutMapping("/update/{user_id}")
 //    public ResponseEntity<UserResponse> updateStory(@PathVariable long user_id, @RequestBody UserRequest userRequest) {

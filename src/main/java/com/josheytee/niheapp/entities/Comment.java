@@ -4,29 +4,32 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment extends BaseEntity{
+@Table(name = "comments")
+public class Comment extends BaseEntity {
     private String content;
 //    private ArrayList<String> attachments;
 
 //    protected ArrayList<Reaction> reactions;
 
-//    private User user;
-
-//    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name="story_id")
-    private Story story;
+    private User user;
 
+    //    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Story story;
 
 
 }
