@@ -36,9 +36,10 @@ public class CommentController {
         Story story = this.storyService.get(story_id);
 //        User user = this.userService.get(commentRequest.getUser_id());
         Comment commentBuilder = Comment.builder()
-                .text(commentRequest.getText())
-//                .story(story)
+                .content(commentRequest.getContent())
+                .story(story)
                 .build();
+//        story.setComments(List.of(commentBuilder));
         Comment comment = this.commentService.create(commentBuilder);
         BaseResponse<Comment> commentBaseResponse = new BaseResponse<>(201, "Comment Created Successfully!", comment);
         return new ResponseEntity<>(commentBaseResponse, HttpStatus.CREATED);
