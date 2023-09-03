@@ -2,7 +2,7 @@ package com.josheytee.niheapp.user;
 
 import com.josheytee.niheapp.comment.Comment;
 import com.josheytee.niheapp.story.Story;
-import com.josheytee.niheapp.token.Token;
+import com.josheytee.niheapp.user.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

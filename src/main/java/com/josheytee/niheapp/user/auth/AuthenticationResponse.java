@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.auth;
+package com.josheytee.niheapp.user.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

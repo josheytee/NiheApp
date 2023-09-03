@@ -28,8 +28,9 @@ public class Story  {
     //    ArrayList<String> attachments;
 //    ArrayList<Reaction> reactions;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
+
     @OneToMany(mappedBy = "story")
     List<Comment> comments;
 }

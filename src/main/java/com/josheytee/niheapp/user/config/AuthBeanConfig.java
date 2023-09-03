@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.config;
+package com.josheytee.niheapp.user.config;
 
 import com.josheytee.niheapp.user.UserRepository;
 import lombok.RequiredArgsConstructor;

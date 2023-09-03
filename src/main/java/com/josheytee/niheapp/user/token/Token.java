@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.token;
+package com.josheytee.niheapp.user.token;
 
 import com.josheytee.niheapp.user.User;
 import jakarta.persistence.*;

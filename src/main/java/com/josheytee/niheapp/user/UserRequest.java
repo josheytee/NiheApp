@@ -10,23 +10,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
-    String firstname;
-    String lastname;
-    String username;
-    String email;
-    String phone;
-    String state;
-    String country;
-    String address;
+    private String firstname;
+    private String lastname;
+    private String username;
+    private String email;
+    private String phone;
+    private String state;
+    private String country;
+    private String address;
 
 //    private List<User> friends;
 
-//    @OneToMany(targetEntity = User.class, mappedBy = "user", cascade = CascadeType.ALL)
-//    public List<User> getFriends() {
-//        return this.friends;
-//    }
-//
-//    public void setFriends(List<User> friends) {
-//        this.friends = friends;
-//    }
+    public User toUser() {
+        return User.builder()
+                .firstname(this.getFirstname())
+                .lastname(this.getLastname())
+                .username(this.getUsername())
+                .email(this.getEmail())
+                .phone(this.getPhone())
+                .address(this.getAddress())
+                .state(this.getState())
+                .country(this.getCountry())
+                .build();
+    }
 }

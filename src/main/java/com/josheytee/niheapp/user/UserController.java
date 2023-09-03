@@ -20,17 +20,7 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<UserDTO> create(@RequestBody UserRequest userRequest) {
-        User userBuilder = User.builder()
-                .firstname(userRequest.getFirstname())
-                .lastname(userRequest.getLastname())
-                .username(userRequest.getUsername())
-                .email(userRequest.getEmail())
-                .phone(userRequest.getPhone())
-                .address(userRequest.getAddress())
-                .state(userRequest.getState())
-                .country(userRequest.getCountry())
-                .build();
-        User user = this.userService.create(userBuilder);
+        User user = this.userService.create(userRequest.toUser());
         UserDTO userResponse = new UserDTO();
         BeanUtils.copyProperties(user, userResponse);
         return new ResponseEntity<>(userResponse, HttpStatus.CREATED);

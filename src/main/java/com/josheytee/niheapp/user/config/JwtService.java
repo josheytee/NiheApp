@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.config;
+package com.josheytee.niheapp.user.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

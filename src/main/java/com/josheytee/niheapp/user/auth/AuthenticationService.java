@@ -1,23 +1,19 @@
-package com.josheytee.niheapp.auth;
+package com.josheytee.niheapp.user.auth;
 
-import com.josheytee.niheapp.config.JwtService;
-import com.josheytee.niheapp.token.Token;
-import com.josheytee.niheapp.token.TokenRepository;
-import com.josheytee.niheapp.token.TokenType;
-import com.josheytee.niheapp.user.Role;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.josheytee.niheapp.user.config.JwtService;
+import com.josheytee.niheapp.user.token.Token;
+import com.josheytee.niheapp.user.token.TokenRepository;
+import com.josheytee.niheapp.user.token.TokenType;
 import com.josheytee.niheapp.user.User;
 import com.josheytee.niheapp.user.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -32,13 +28,7 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
-    var user = User.builder()
-        .firstname(request.getFirstname())
-        .lastname(request.getLastname())
-        .email(request.getEmail())
-        .password(passwordEncoder.encode(request.getPassword()))
-        .role(request.getRole())
-        .build();
+    var user = request.toUser(passwordEncoder);
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);

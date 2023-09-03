@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.auth;
+package com.josheytee.niheapp.user.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

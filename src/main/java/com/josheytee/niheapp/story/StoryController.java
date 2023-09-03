@@ -1,14 +1,16 @@
 package com.josheytee.niheapp.story;
 
 import com.josheytee.niheapp.app.BaseResponse;
+import com.josheytee.niheapp.user.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/stories")
+@RequestMapping("/api/v1/stories")
 public class StoryController {
 
     private final StoryService storyService;
@@ -18,12 +20,9 @@ public class StoryController {
     }
 
     @PostMapping()
-    public ResponseEntity<BaseResponse<Story>> create(@RequestBody StoryRequest storyRequest) {
-        Story storyBuilder = Story.builder()
-                .title(storyRequest.getTitle())
-                .content(storyRequest.getContent())
-                .build();
-        Story story = this.storyService.create(storyBuilder);
+    public ResponseEntity<BaseResponse<Story>> create(@AuthenticationPrincipal User user,
+                                                      @RequestBody StoryRequest storyRequest) {
+        Story story = this.storyService.create(storyRequest.toStory(user));
         BaseResponse<Story> storyBaseResponse = new BaseResponse<>(201, "Story created Successfully!", story);
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.CREATED);
     }
@@ -46,7 +45,7 @@ public class StoryController {
                     .message(exception.getMessage())
                     .data(null);
         }
-            return new ResponseEntity<>(storyBaseResponse.build(), HttpStatus.OK);
+        return new ResponseEntity<>(storyBaseResponse.build(), HttpStatus.OK);
 
     }
 

@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.auth;
+package com.josheytee.niheapp.user.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
