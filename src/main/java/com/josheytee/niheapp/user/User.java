@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User  implements UserDetails {
+public class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +41,10 @@ public class User  implements UserDetails {
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
 
-  @OneToMany(mappedBy ="user", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy ="user")
   private List<Comment> comments;
 
-  @OneToMany(mappedBy ="user", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy ="user")
   private List<Story> stories;
 
   //    ArrayList<User> friends;
