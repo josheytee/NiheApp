@@ -62,6 +62,7 @@ public class UserController {
                 .build();
         return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
     }
+
 //
 //
 //    @DeleteMapping("/delete/{id}")

@@ -1,13 +1,11 @@
 package com.josheytee.niheapp.app;
 
-import com.josheytee.niheapp.app.AppRepository;
-import com.josheytee.niheapp.app.AppCRUDService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public abstract class AppCRUDServiceImpl<T> implements AppCRUDService<T> {
 
     private final AppRepository<T, Long> appRepository;

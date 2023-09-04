@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class StoryController {
 
     private final StoryService storyService;
+    private final ReactionService reactionService;
 
-    public StoryController(StoryService storyService) {
+    public StoryController(StoryService storyService, ReactionService reactionService) {
         this.storyService = storyService;
+        this.reactionService = reactionService;
     }
 
     @PostMapping()
@@ -67,15 +69,18 @@ public class StoryController {
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.OK);
     }
 
-    //    @PostMapping("/{userid}")
-//    public ResponseEntity<BaseResponse<List<StoryDTO>>> all(long userid) {
-//        List<StoryDTO> userStories = storyService.getUserStories(userid);
-//        BaseResponse<List<StoryDTO>> listBaseResponse = new BaseResponse<>();
-//        listBaseResponse.setData(userStories);
-//        listBaseResponse.setMessage("Successfully Fetched user stories");
-//        listBaseResponse.setCode(201);
-//        return new ResponseEntity<>(listBaseResponse, HttpStatus.CREATED);
-//
-//    }
+    @GetMapping("/{id}/react/{reaction_id}")
+    public ResponseEntity<BaseResponse<Story>> addReaction(@PathVariable("id") long id,
+                                                    @PathVariable("reaction_id") long reaction_id,
+                                                    @AuthenticationPrincipal User user) {
+        Story story = storyService.get(id);
+        Reaction reaction = reactionService.get(reaction_id);
+        boolean add = story.getReactions().add(reaction);
+//        boolean remove = story.reactions.remove(reaction);
+        Story update = storyService.update(id, story);
+
+        BaseResponse<Story> storyBaseResponse = new BaseResponse<>(200, "Reaction added Successfully!", update);
+        return new ResponseEntity<>(storyBaseResponse, HttpStatus.CREATED);
+    }
 
 }
