@@ -1,5 +1,6 @@
 package com.josheytee.niheapp.story;
 
+import com.josheytee.niheapp.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReactionRequest {
-    String code;
-    String name;
+    private Emotion emotion;
+    private User user;
+    private Story story;
 
-    Reaction toReaction() {
+    Reaction toReaction(User user, Story story) {
         return Reaction.builder()
-                .code(this.getCode())
-                .name(this.getName())
+                .emotion(emotion)
+                .user(user)
+                .story(story)
                 .build();
     }
 }

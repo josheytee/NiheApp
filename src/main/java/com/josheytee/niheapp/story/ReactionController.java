@@ -1,11 +1,6 @@
 package com.josheytee.niheapp.story;
 
-import com.josheytee.niheapp.app.BaseResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,15 +11,15 @@ public class ReactionController {
     public ReactionController(ReactionService reactionService) {
         this.reactionService = reactionService;
     }
-    @PostMapping
-    public ResponseEntity<BaseResponse<Reaction>> create(@RequestBody ReactionRequest reactionRequest){
-        Reaction reaction = this.reactionService.create(reactionRequest.toReaction());
-
-        BaseResponse<Reaction> reactionBaseResponse = new BaseResponse<>(201, "Reaction created Successfully!",
-                reaction);
-
-        return new ResponseEntity<>(reactionBaseResponse, HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<BaseResponse<Reaction>> create(@RequestBody ReactionRequest reactionRequest){
+//        Reaction reaction = this.reactionService.create(reactionRequest.toReaction());
+//
+//        BaseResponse<Reaction> reactionBaseResponse = new BaseResponse<>(201, "Reaction created Successfully!",
+//                reaction);
+//
+//        return new ResponseEntity<>(reactionBaseResponse, HttpStatus.CREATED);
+//    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.josheytee.niheapp.user;
 
 import com.josheytee.niheapp.comment.Comment;
+import com.josheytee.niheapp.story.Reaction;
 import com.josheytee.niheapp.story.Story;
 import com.josheytee.niheapp.user.token.Token;
 import jakarta.persistence.*;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -50,6 +52,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Friend> friends;
 
+
+    @OneToMany(mappedBy = "user")
+    Set<Reaction> reactions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

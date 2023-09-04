@@ -14,14 +14,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "reactions")
-public class Reaction {
+public class Shared {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Emotion emotion;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -31,7 +29,4 @@ public class Reaction {
     @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
 
-}
-enum Emotion{
-    HAPPY, SAD, CARE, LOVE
 }

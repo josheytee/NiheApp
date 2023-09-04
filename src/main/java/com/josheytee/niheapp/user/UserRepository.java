@@ -8,6 +8,4 @@ public interface UserRepository extends AppRepository<User, Long> {
 
   Optional<User> findByEmail(String email);
 
-
-
 }

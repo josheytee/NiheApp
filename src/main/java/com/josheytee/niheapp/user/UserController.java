@@ -57,18 +57,11 @@ public class UserController {
 
         UserResponse userResponse = UserResponse.builder()
                 .data(allFromFriendsId)
-                .message("oya na ")
+                .message("user timeline fetched ")
                 .code(200)
                 .build();
-        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
-//
-//
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<UserResponse> delete(@PathVariable("id") long id) throws Exception {
-//        UserResponse userResponse = userService.delete(id);
-//        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
-//    }
 
 }

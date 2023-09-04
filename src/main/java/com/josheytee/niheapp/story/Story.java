@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -26,12 +25,13 @@ public class Story  {
     private String title;
     private String content;
     //    ArrayList<String> attachments;
-    @ManyToMany
-    @JoinTable(
-            name = "story_reactions",
-            joinColumns = @JoinColumn(name = "stories_id"),
-            inverseJoinColumns = @JoinColumn(name = "reactions_id"))
-    Set<Reaction> reactions;
+
+//    @JoinTable(
+//            name = "story_reactions",
+//            joinColumns = @JoinColumn(name = "stories_id"),
+//            inverseJoinColumns = @JoinColumn(name = "reactions_id"))
+    @OneToMany(mappedBy = "story")
+    List<Reaction> reactions;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)

@@ -69,18 +69,14 @@ public class StoryController {
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/react/{reaction_id}")
-    public ResponseEntity<BaseResponse<Story>> addReaction(@PathVariable("id") long id,
-                                                    @PathVariable("reaction_id") long reaction_id,
+    @GetMapping("/{id}/react")
+    public ResponseEntity<BaseResponse<Reaction>> addReaction(@PathVariable("id") long id,
+                                                   @RequestBody ReactionRequest reactionRequest,
                                                     @AuthenticationPrincipal User user) {
         Story story = storyService.get(id);
-        Reaction reaction = reactionService.get(reaction_id);
-        boolean add = story.getReactions().add(reaction);
-//        boolean remove = story.reactions.remove(reaction);
-        Story update = storyService.update(id, story);
-
-        BaseResponse<Story> storyBaseResponse = new BaseResponse<>(200, "Reaction added Successfully!", update);
-        return new ResponseEntity<>(storyBaseResponse, HttpStatus.CREATED);
+        Reaction reaction = reactionService.create(reactionRequest.toReaction(user, story));
+        BaseResponse<Reaction> reactionBaseResponse = new BaseResponse<>(201, "Reaction added Successfully!", reaction);
+        return new ResponseEntity<>(reactionBaseResponse, HttpStatus.CREATED);
     }
 
 }
