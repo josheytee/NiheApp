@@ -9,6 +9,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/api/v1/stories")
 public class StoryController {
@@ -16,9 +18,12 @@ public class StoryController {
     private final StoryService storyService;
     private final ReactionService reactionService;
 
-    public StoryController(StoryService storyService, ReactionService reactionService) {
+    private final SharedStoryService sharedStoryService;
+
+    public StoryController(StoryService storyService, ReactionService reactionService, SharedStoryService sharedStoryService) {
         this.storyService = storyService;
         this.reactionService = reactionService;
+        this.sharedStoryService = sharedStoryService;
     }
 
     @PostMapping()
@@ -28,6 +33,16 @@ public class StoryController {
         BaseResponse<Story> storyBaseResponse = new BaseResponse<>(201, "Story created Successfully!", story);
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<BaseResponse<List<Story>>> stories(@AuthenticationPrincipal User user) {
+        List<Story> stories = user.getStories();
+
+        BaseResponse<List<Story>> baseResponse = new BaseResponse<>(200, "User stories fetched Successfully!",
+                stories);
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
 
     @PutMapping("/{story_id}")
     public ResponseEntity<BaseResponse<Story>> updateStory(ModelMapper modelMapper, @PathVariable long story_id,
@@ -77,6 +92,16 @@ public class StoryController {
         Reaction reaction = reactionService.create(reactionRequest.toReaction(user, story));
         BaseResponse<Reaction> reactionBaseResponse = new BaseResponse<>(201, "Reaction added Successfully!", reaction);
         return new ResponseEntity<>(reactionBaseResponse, HttpStatus.CREATED);
+    }
+    @PostMapping("/{id}/share")
+    public ResponseEntity<BaseResponse<SharedStory>> share(@PathVariable("id") long id,
+                                                   @RequestBody ShareStoryRequest shareStoryRequest,
+                                                    @AuthenticationPrincipal User user) {
+        Story story = storyService.get(id);
+        SharedStory sharedStory = sharedStoryService.create(shareStoryRequest.toSharedStory(user, story));
+        BaseResponse<SharedStory> sharedStoryBaseResponse = new BaseResponse<>(201, "Share Successful!",
+                sharedStory);
+        return new ResponseEntity<>(sharedStoryBaseResponse, HttpStatus.CREATED);
     }
 
 }

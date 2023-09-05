@@ -13,13 +13,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "reactions")
-public class Shared {
+@Table(name = "shared_stories")
+public class SharedStory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)

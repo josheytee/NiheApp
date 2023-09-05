@@ -31,13 +31,16 @@ public class Story  {
 //            joinColumns = @JoinColumn(name = "stories_id"),
 //            inverseJoinColumns = @JoinColumn(name = "reactions_id"))
     @OneToMany(mappedBy = "story")
-    List<Reaction> reactions;
+    private List<Reaction> reactions;
+
+    @OneToMany(mappedBy = "story")
+    private List<SharedStory> sharedStories;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
 
     @OneToMany(mappedBy = "story")
-    List<Comment> comments;
+    private List<Comment> comments;
 
 }

@@ -50,7 +50,7 @@ public class UserController {
 
     @GetMapping("/timeline")
     public ResponseEntity<UserResponse> updateStory(@AuthenticationPrincipal User user) {
-        List<Friend> friends = user.getFriends();
+//        List<Friend> friends = user.getFriends();
         List<Long> allIdsFromUser = friendRepository.getAllIdsFromUser(user);
         List<Story> allFromFriendsId = storyRepository.getAllFromFriendsId(allIdsFromUser);
 
