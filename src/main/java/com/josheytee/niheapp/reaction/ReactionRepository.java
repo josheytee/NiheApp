@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.story;
+package com.josheytee.niheapp.reaction;
 
 import com.josheytee.niheapp.app.AppRepository;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,7 @@
-package com.josheytee.niheapp.story;
+package com.josheytee.niheapp.reaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.josheytee.niheapp.story.Story;
 import com.josheytee.niheapp.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.josheytee.niheapp.user;
 
 import com.josheytee.niheapp.comment.Comment;
-import com.josheytee.niheapp.story.Reaction;
+import com.josheytee.niheapp.reaction.Reaction;
 import com.josheytee.niheapp.story.Story;
 import com.josheytee.niheapp.user.token.Token;
 import jakarta.persistence.*;

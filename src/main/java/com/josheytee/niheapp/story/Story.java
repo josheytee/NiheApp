@@ -2,6 +2,7 @@ package com.josheytee.niheapp.story;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.josheytee.niheapp.comment.Comment;
+import com.josheytee.niheapp.reaction.Reaction;
 import com.josheytee.niheapp.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

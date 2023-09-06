@@ -1,6 +1,9 @@
 package com.josheytee.niheapp.story;
 
 import com.josheytee.niheapp.app.BaseResponse;
+import com.josheytee.niheapp.reaction.Reaction;
+import com.josheytee.niheapp.reaction.ReactionRequest;
+import com.josheytee.niheapp.reaction.ReactionService;
 import com.josheytee.niheapp.user.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -80,8 +83,8 @@ public class StoryController {
 
     @GetMapping("/{id}/react")
     public ResponseEntity<BaseResponse<Reaction>> addReaction(@PathVariable("id") long id,
-                                                   @RequestBody ReactionRequest reactionRequest,
-                                                    @AuthenticationPrincipal User user) {
+                                                              @RequestBody ReactionRequest reactionRequest,
+                                                              @AuthenticationPrincipal User user) {
         Story story = storyService.get(id);
         Reaction reaction = reactionService.create(reactionRequest.toReaction(user, story));
         BaseResponse<Reaction> reactionBaseResponse = new BaseResponse<>(201, "Reaction added Successfully!", reaction);

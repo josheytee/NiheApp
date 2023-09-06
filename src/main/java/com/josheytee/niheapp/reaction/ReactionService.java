@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.story;
+package com.josheytee.niheapp.reaction;
 
 import com.josheytee.niheapp.app.AppCRUDService;
 import org.springframework.stereotype.Service;
