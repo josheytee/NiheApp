@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.user.config;
+package com.josheytee.niheapp.auth.config;
 
 import com.josheytee.niheapp.user.token.TokenRepository;
 import jakarta.servlet.FilterChain;

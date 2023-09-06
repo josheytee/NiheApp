@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.user.config;
+package com.josheytee.niheapp.auth.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
