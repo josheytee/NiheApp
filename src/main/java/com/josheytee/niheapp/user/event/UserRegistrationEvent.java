@@ -1,5 +1,6 @@
-package com.josheytee.niheapp.user;
+package com.josheytee.niheapp.user.event;
 
+import com.josheytee.niheapp.user.User;
 import org.springframework.context.ApplicationEvent;
 
 public class UserRegistrationEvent extends ApplicationEvent {

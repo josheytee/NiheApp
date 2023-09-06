@@ -13,11 +13,20 @@ import lombok.NoArgsConstructor;
 public class StoryRequest {
     String title;
     String content;
+    Story parent;
 
     Story toStory(User user) {
         return Story.builder()
                 .title(this.getTitle())
                 .content(this.getContent())
+                .user(user)
+                .build();
+    }
+    Story toStory(User user, Story parent) {
+        return Story.builder()
+                .title(this.getTitle())
+                .content(this.getContent())
+                .parent(parent)
                 .user(user)
                 .build();
     }

@@ -2,7 +2,6 @@ package com.josheytee.niheapp.user;
 
 import com.josheytee.niheapp.comment.Comment;
 import com.josheytee.niheapp.story.Reaction;
-import com.josheytee.niheapp.story.SharedStory;
 import com.josheytee.niheapp.story.Story;
 import com.josheytee.niheapp.user.token.Token;
 import jakarta.persistence.*;
@@ -49,9 +48,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Story> stories;
-
-    @OneToMany(mappedBy = "user")
-    private Set<SharedStory> sharedStories;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Friend> friends;

@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "stories")
-public class Story  {
+public class Story {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +26,15 @@ public class Story  {
     private String content;
     //    ArrayList<String> attachments;
 
-//    @JoinTable(
+    //    @JoinTable(
 //            name = "story_reactions",
 //            joinColumns = @JoinColumn(name = "stories_id"),
 //            inverseJoinColumns = @JoinColumn(name = "reactions_id"))
     @OneToMany(mappedBy = "story")
     private List<Reaction> reactions;
 
-    @OneToMany(mappedBy = "story")
-    private List<SharedStory> sharedStories;
+    @OneToOne
+    private Story parent;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)

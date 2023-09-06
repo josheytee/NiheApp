@@ -1,6 +1,7 @@
 package com.josheytee.niheapp.user;
 
 import com.josheytee.niheapp.app.AppCRUDServiceImpl;
+import com.josheytee.niheapp.user.event.UserRegistrationEvent;
 import org.springframework.stereotype.Component;
 
 @Component

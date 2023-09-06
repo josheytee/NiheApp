@@ -1,4 +1,4 @@
-package com.josheytee.niheapp.user;
+package com.josheytee.niheapp.user.event;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

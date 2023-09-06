@@ -18,12 +18,9 @@ public class StoryController {
     private final StoryService storyService;
     private final ReactionService reactionService;
 
-    private final SharedStoryService sharedStoryService;
-
-    public StoryController(StoryService storyService, ReactionService reactionService, SharedStoryService sharedStoryService) {
+    public StoryController(StoryService storyService, ReactionService reactionService) {
         this.storyService = storyService;
         this.reactionService = reactionService;
-        this.sharedStoryService = sharedStoryService;
     }
 
     @PostMapping()
@@ -69,13 +66,10 @@ public class StoryController {
     @GetMapping("/{id}")
     public ResponseEntity<BaseResponse<Story>> getStory(@PathVariable("id") long id) {
         Story story = storyService.get(id);
-
         BaseResponse<Story> storyBaseResponse = new BaseResponse<>(200, "Story Fetched Successfully!", story);
-
         return new ResponseEntity<>(storyBaseResponse, HttpStatus.OK);
     }
 
-    //
     @DeleteMapping("/{id}")
     public ResponseEntity<BaseResponse<Story>> delete(@PathVariable("id") long id) throws Exception {
         storyService.delete(id);
@@ -94,12 +88,12 @@ public class StoryController {
         return new ResponseEntity<>(reactionBaseResponse, HttpStatus.CREATED);
     }
     @PostMapping("/{id}/share")
-    public ResponseEntity<BaseResponse<SharedStory>> share(@PathVariable("id") long id,
-                                                   @RequestBody ShareStoryRequest shareStoryRequest,
+    public ResponseEntity<BaseResponse<Story>> share(@PathVariable("id") long id,
+                                                   @RequestBody StoryRequest storyRequest,
                                                     @AuthenticationPrincipal User user) {
-        Story story = storyService.get(id);
-        SharedStory sharedStory = sharedStoryService.create(shareStoryRequest.toSharedStory(user, story));
-        BaseResponse<SharedStory> sharedStoryBaseResponse = new BaseResponse<>(201, "Share Successful!",
+        Story parent = storyService.get(id);
+        Story sharedStory = this.storyService.create(storyRequest.toStory(user, parent));
+        BaseResponse<Story> sharedStoryBaseResponse = new BaseResponse<>(201, "Share Successful!",
                 sharedStory);
         return new ResponseEntity<>(sharedStoryBaseResponse, HttpStatus.CREATED);
     }

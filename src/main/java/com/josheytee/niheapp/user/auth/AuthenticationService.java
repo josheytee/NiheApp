@@ -1,7 +1,7 @@
 package com.josheytee.niheapp.user.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.josheytee.niheapp.user.UserRegistrationEvent;
+import com.josheytee.niheapp.user.event.UserRegistrationEvent;
 import com.josheytee.niheapp.user.config.JwtService;
 import com.josheytee.niheapp.user.token.Token;
 import com.josheytee.niheapp.user.token.TokenRepository;
