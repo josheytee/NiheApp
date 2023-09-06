@@ -1,6 +1,8 @@
 package com.josheytee.niheapp.app;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +12,23 @@ public abstract class AppCRUDServiceImpl<T> implements AppCRUDService<T> {
 
     private final AppRepository<T, Long> appRepository;
 
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+
 //    private final ModelMapper modelMapper;
 
     public AppCRUDServiceImpl(AppRepository<T, Long> appRepository) {
         this.appRepository = appRepository;
 //        modelMapper = new ModelMapper();
+    }
+
+    public AppCRUDServiceImpl(AppRepository<T, Long> appRepository, ApplicationEventPublisher eventPublisher) {
+        this.appRepository = appRepository;
+        this.eventPublisher = eventPublisher;
+    }
+
+    public ApplicationEventPublisher getEventPublisher() {
+        return eventPublisher;
     }
 
     @Override

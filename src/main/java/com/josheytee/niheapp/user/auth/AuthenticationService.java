@@ -1,6 +1,7 @@
 package com.josheytee.niheapp.user.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.josheytee.niheapp.user.UserRegistrationEvent;
 import com.josheytee.niheapp.user.config.JwtService;
 import com.josheytee.niheapp.user.token.Token;
 import com.josheytee.niheapp.user.token.TokenRepository;
@@ -10,6 +11,8 @@ import com.josheytee.niheapp.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,12 +30,15 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
+  @Autowired
+  private ApplicationEventPublisher eventPublisher;
   public AuthenticationResponse register(RegisterRequest request) {
     var user = request.toUser(passwordEncoder);
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
     saveUserToken(savedUser, jwtToken);
+    this.eventPublisher.publishEvent(new UserRegistrationEvent(this, savedUser));
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
             .refreshToken(refreshToken)

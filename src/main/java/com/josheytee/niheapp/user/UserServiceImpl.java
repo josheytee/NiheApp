@@ -11,4 +11,13 @@ public class UserServiceImpl extends AppCRUDServiceImpl<User> implements UserSer
         super(userRepository);
         this.userRepository = userRepository;
     }
+
+    @Override
+    public User create(User user) {
+        User createdUser = super.create(user);
+        if (createdUser != null)
+            this.getEventPublisher().publishEvent(new UserRegistrationEvent(this, createdUser));
+
+        return createdUser;
+    }
 }
